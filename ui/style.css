@@ -1,0 +1,18 @@
+/*
+ * Minimal app-specific styles only.
+ * Colours, typography and component styles come from the Adwaita system theme.
+ * Do NOT override window/button/entry/headerbar colours here.
+ */
+
+/* Deck-grid button tiles – sizing + shape only */
+.deck-btn {
+    border-radius: 12px;
+    padding: 4px;
+    min-width: 86px;
+    min-height: 86px;
+    font-size: 12px;
+}
+
+.deck-btn.empty {
+    opacity: 0.45;
+}

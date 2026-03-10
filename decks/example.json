@@ -1,0 +1,39 @@
+{
+  "deck_id": "example",
+  "deck_name": "Example",
+  "grid": {
+    "rows": 4,
+    "cols": 4
+  },
+  "buttons": {
+    "0,0": {
+      "label": "Hello",
+      "behavior": "single",
+      "command": "notify-send 'DeckApp' 'Hello from DeckApp! \u270b'"
+    },
+    "0,1": {
+      "label": "Date",
+      "behavior": "single",
+      "command": "notify-send 'Today' \"$(date '+%A, %d %B %Y')\""
+    },
+    "0,2": {
+      "label": "Screenshot",
+      "behavior": "single",
+      "command": "gnome-screenshot || scrot ~/Pictures/screenshot-$(date +%s).png"
+    },
+    "1,0": {
+      "label": "Mute",
+      "behavior": "toggle",
+      "state": "off",
+      "on":  { "command": "pactl set-sink-mute @DEFAULT_SINK@ 1" },
+      "off": { "command": "pactl set-sink-mute @DEFAULT_SINK@ 0" }
+    },
+    "1,1": {
+      "label": "Night Light",
+      "behavior": "toggle",
+      "state": "off",
+      "on":  { "command": "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true" },
+      "off": { "command": "gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false" }
+    }
+  }
+}

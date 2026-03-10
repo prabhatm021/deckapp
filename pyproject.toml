@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "deckapp"
+version = "1.2.0"
+description = "A virtual macro-pad for Linux — create decks of buttons that run shell commands"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "prabhatm021" }]
+requires-python = ">=3.10"
+keywords = ["macro-pad", "gtk4", "libadwaita", "automation", "linux"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Environment :: X11 Applications :: GTK",
+    "Topic :: Utilities",
+]
+
+# GTK4 / libadwaita are system packages — not available via pip.
+# Install them with your package manager:
+#   Debian/Ubuntu: sudo apt install python3-gi gir1.2-gtk-4.0 gir1.2-adw-1
+dependencies = []
+
+[project.scripts]
+deckapp = "deckapp.app:main"
+
+[project.urls]
+Homepage = "https://github.com/prabhatm021/deckapp"
+Issues = "https://github.com/prabhatm021/deckapp/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["deckapp*"]
+
+[tool.setuptools.package-data]
+deckapp = ["ui/style.css", "decks/*.json", "assets/icons/.gitkeep"]
