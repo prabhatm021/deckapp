@@ -14,6 +14,12 @@ from deckapp.ui.deck_grid import DeckGrid
 MIN_WIDTH = 160
 MIN_HEIGHT = 120
 
+# The close button only appears while the pointer is in this corner, measured
+# from the top right. Window-wide :hover would show it the whole time the pad
+# is in use, which defeats the point of a bare window.
+CORNER_WIDTH = 96
+CORNER_HEIGHT = 64
+
 
 class PadWindow(Adw.ApplicationWindow):
     def __init__(self, app, deck):
@@ -34,7 +40,8 @@ class PadWindow(Adw.ApplicationWindow):
 
         overlay = Gtk.Overlay()
         overlay.set_child(self.grid)
-        overlay.add_overlay(self._build_close_button())
+        self.close_button = self._build_close_button()
+        overlay.add_overlay(self.close_button)
         self._overlay = overlay
 
         # Dragging anywhere that is not a deck button moves the pad
@@ -42,6 +49,7 @@ class PadWindow(Adw.ApplicationWindow):
         handle.set_child(overlay)
 
         self.set_content(handle)
+        self._watch_pointer()
         self.set_size_request(MIN_WIDTH, MIN_HEIGHT)
         self._install_keys()
 
@@ -58,6 +66,29 @@ class PadWindow(Adw.ApplicationWindow):
         button.set_tooltip_text(f"Close “{self.deck.name}” (Esc)")
         button.connect("clicked", lambda *_: self.close())
         return button
+
+    def _watch_pointer(self):
+        motion = Gtk.EventControllerMotion()
+        motion.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
+        motion.connect("motion", self._on_pointer_moved)
+        motion.connect("leave", lambda *_: self._show_close(False))
+        self.add_controller(motion)
+
+        # Belt and braces: a pointer that leaves without a leave event, or a
+        # window that loses focus, must not strand the button on screen.
+        self.connect("notify::is-active",
+                     lambda *_: None if self.is_active() else self._show_close(False))
+
+    def _on_pointer_moved(self, _controller, x, y):
+        in_corner = (x >= self.get_width() - CORNER_WIDTH
+                     and y <= CORNER_HEIGHT)
+        self._show_close(in_corner)
+
+    def _show_close(self, visible):
+        if visible:
+            self.close_button.add_css_class("visible")
+        else:
+            self.close_button.remove_css_class("visible")
 
     def _install_keys(self):
         keys = Gtk.EventControllerKey()
