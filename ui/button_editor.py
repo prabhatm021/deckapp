@@ -12,8 +12,8 @@ from deckapp.ui import choose_image, confirm, show_error
 
 BEHAVIOR_LABELS = ["Single", "Toggle"]
 BEHAVIOR_HINTS = [
-    "Runs one command each time it is pressed.",
-    "Alternates between an ON and an OFF command.",
+    "One command per press",
+    "Separate ON and OFF commands",
 ]
 
 

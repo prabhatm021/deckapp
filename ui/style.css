@@ -88,7 +88,7 @@
     transition: opacity 120ms ease-out;
 }
 
-.deck-pad.deck-pad-hover .deck-pad-close {
+.deck-pad:hover .deck-pad-close {
     opacity: 0.55;
 }
 

@@ -42,7 +42,6 @@ class PadWindow(Adw.ApplicationWindow):
         handle.set_child(overlay)
 
         self.set_content(handle)
-        self._reveal_close_on_hover()
         self.set_size_request(MIN_WIDTH, MIN_HEIGHT)
         self._install_keys()
 
@@ -59,13 +58,6 @@ class PadWindow(Adw.ApplicationWindow):
         button.set_tooltip_text(f"Close “{self.deck.name}” (Esc)")
         button.connect("clicked", lambda *_: self.close())
         return button
-
-    def _reveal_close_on_hover(self):
-        """The pad stays bare until the pointer is on it."""
-        motion = Gtk.EventControllerMotion()
-        motion.connect("enter", lambda *_: self.add_css_class("deck-pad-hover"))
-        motion.connect("leave", lambda *_: self.remove_css_class("deck-pad-hover"))
-        self.add_controller(motion)
 
     def _install_keys(self):
         keys = Gtk.EventControllerKey()
