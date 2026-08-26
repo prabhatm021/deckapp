@@ -169,12 +169,10 @@ DeckApp skips the broken parts instead of refusing to start.
 Buttons run with your shell and your environment, so a deck file someone sends
 you can do anything a shell script can.
 
-## Driving it from an assistant
+## MCP
 
-There is a separate MCP server at
-[deckapp-mcp](https://github.com/prabhatm021/deckapp-mcp). It lets an assistant
-create decks, wire buttons to commands and press them, working on the same deck
-files as the app.
+[deckapp-mcp](https://github.com/prabhatm021/deckapp-mcp) is a separate MCP
+server for DeckApp, so tools like Claude can build and run your decks.
 
 ## Tests
 
