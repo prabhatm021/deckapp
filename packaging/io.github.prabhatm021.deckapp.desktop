@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=DeckApp
+GenericName=Macro Pad
+Comment=Grids of buttons that run shell commands
+Exec=deckapp
+Icon=io.github.prabhatm021.deckapp
+Terminal=false
+Categories=Utility;
+Keywords=macro;macropad;shortcut;automation;launcher;
+StartupNotify=true
+StartupWMClass=deckapp

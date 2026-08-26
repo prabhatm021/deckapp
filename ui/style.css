@@ -1,18 +1,114 @@
 /*
- * Minimal app-specific styles only.
- * Colours, typography and component styles come from the Adwaita system theme.
- * Do NOT override window/button/entry/headerbar colours here.
+ * App-specific styles only.
+ * Colours, typography and component styling come from the Adwaita system
+ * theme, so DeckApp follows the desktop's light/dark preference and accent.
+ * Do NOT hard-code window/button/entry/headerbar colours here.
  */
 
-/* Deck-grid button tiles – sizing + shape only */
+/* Deck tiles — sizing and shape only */
 .deck-btn {
     border-radius: 12px;
-    padding: 4px;
-    min-width: 86px;
-    min-height: 86px;
-    font-size: 12px;
+    padding: 6px;
+    min-width: 88px;
+    min-height: 88px;
+    font-size: 0.9em;
 }
 
-.deck-btn.empty {
-    opacity: 0.45;
+/* An empty key on the pad: visible as a slot, but clearly not a button */
+.deck-btn.deck-slot {
+    background: alpha(currentColor, 0.045);
+    box-shadow: none;
+    border: none;
+}
+
+/* Empty cells in the editor: present but clearly not a real button */
+.deck-btn.deck-empty {
+    background: none;
+    box-shadow: none;
+    border: 1px dashed alpha(currentColor, 0.35);
+    opacity: 0.7;
+}
+
+.deck-btn.deck-empty:hover {
+    background: alpha(currentColor, 0.06);
+    opacity: 1;
+}
+
+/* Tile states: single running, toggle on, toggle off */
+.deck-btn.deck-running {
+    background-image: none;
+    background-color: @accent_bg_color;
+    color: @accent_fg_color;
+}
+
+.deck-btn.deck-toggle-on {
+    background-image: none;
+    background-color: #26a269;   /* Adwaita green 5 */
+    color: #ffffff;
+}
+
+.deck-btn.deck-toggle-off {
+    background-image: none;
+    background-color: #b05252;
+    color: #ffffff;
+}
+
+/* A button with no command yet */
+.deck-btn.deck-unset {
+    opacity: 0.6;
+}
+
+/* Drag-and-drop feedback in the editor */
+.deck-btn.deck-dragging {
+    opacity: 0.4;
+}
+
+.deck-btn.deck-drop {
+    outline: 2px solid @accent_bg_color;
+    outline-offset: -2px;
+}
+
+/* Deck list — the row being dragged */
+.deck-row-dragging {
+    background: alpha(@accent_bg_color, 0.20);
+}
+
+/* The pad window — the deck is the whole window, no title bar */
+.deck-pad {
+    background-color: @window_bg_color;
+    border-radius: 12px;
+}
+
+/* Hidden until the pointer is on the pad, so the deck stays bare */
+.deck-pad-close {
+    opacity: 0;
+    min-width: 24px;
+    min-height: 24px;
+    padding: 2px;
+    transition: opacity 120ms ease-out;
+}
+
+.deck-pad.deck-pad-hover .deck-pad-close {
+    opacity: 0.55;
+}
+
+.deck-pad-close:hover,
+.deck-pad-close:focus {
+    opacity: 1;
+}
+
+/* A deck that is open right now */
+.deck-row-open {
+    background: alpha(@accent_bg_color, 0.10);
+}
+
+/* Reorder switch: a secondary control, so smaller than a normal switch */
+.deck-reorder switch {
+    min-width: 36px;
+    min-height: 18px;
+}
+
+.deck-reorder switch > slider {
+    min-width: 14px;
+    min-height: 14px;
 }

@@ -7,17 +7,22 @@ __pycache__/
 dist/
 build/
 .eggs/
+.pytest_cache/
 
 # Virtual environments
 .venv/
 venv/
 env/
 
-# User data (generated at runtime — not source files)
+# User data (generated at runtime — not source files).
+# assets/app/ is NOT ignored: those are the application's own icons.
 assets/icons/*
 !assets/icons/.gitkeep
 decks/*.json
 !decks/example.json
+
+# Development output
+screenshots/
 
 # IDE / editor
 .vscode/

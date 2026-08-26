@@ -1,11 +1,11 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "deckapp"
-version = "1.2.0"
-description = "A virtual macro-pad for Linux — create decks of buttons that run shell commands"
+version = "3.0.0"
+description = "A virtual macro pad for Linux — decks of buttons that run shell commands"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{ name = "prabhatm021" }]
@@ -19,10 +19,12 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
-# GTK4 / libadwaita are system packages — not available via pip.
-# Install them with your package manager:
+# GTK4 / libadwaita are system packages — they are not installable from PyPI.
 #   Debian/Ubuntu: sudo apt install python3-gi gir1.2-gtk-4.0 gir1.2-adw-1
 dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
 
 [project.scripts]
 deckapp = "deckapp.app:main"
@@ -31,9 +33,16 @@ deckapp = "deckapp.app:main"
 Homepage = "https://github.com/prabhatm021/deckapp"
 Issues = "https://github.com/prabhatm021/deckapp/issues"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["deckapp*"]
+# The repository root *is* the `deckapp` package, so map it explicitly.
+[tool.setuptools]
+packages = ["deckapp", "deckapp.core", "deckapp.ui"]
+
+[tool.setuptools.package-dir]
+deckapp = "."
 
 [tool.setuptools.package-data]
-deckapp = ["ui/style.css", "decks/*.json", "assets/icons/.gitkeep"]
+deckapp = ["ui/style.css", "decks/*.json", "assets/app/*.svg",
+           "assets/app/*.png", "assets/app/hicolor/*/*/*.svg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

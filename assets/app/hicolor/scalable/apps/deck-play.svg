@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Deliberately NOT named *-symbolic: the shell would recolour it to full
+     white. The muted grey is baked in so the arrow sits behind the label. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <path d="M5.2 3.4a.6.6 0 0 1 .93-.5l6.1 4.1a.6.6 0 0 1 0 1l-6.1 4.1a.6.6 0 0 1-.93-.5z"
+        fill="#8b8b8b"/>
+</svg>
